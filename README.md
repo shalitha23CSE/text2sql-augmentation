@@ -3,8 +3,7 @@
 This repository contains the source code and Google Colab notebook associated 
 with the BSc thesis:
 
-> **"Improving Generalization in Language Model-Based Text-to-SQL using 
-> Data Augmentation"**  
+> **"Data Augmentation for Enhancing SQL Query Generation: A Natural Language Processing Approach"**  
 > E. W. S. Anuradha, 2026
 
 ## Contents
