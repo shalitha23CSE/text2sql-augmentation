@@ -62,23 +62,25 @@ batch sizes or fewer epochs to avoid out-of-memory errors.
 
 ## Key Results (Spider dev set)
 
-Single-seed evaluation on the Spider validation set (1,034 examples).
+Multi-seed evaluation (3 seeds) on the Spider validation set (1,034 examples).  
+Results reported as **mean ± standard deviation** across seeds.
 
 | Stage | Description | EM (%) | Token F1 (%) | ΔEM vs Baseline |
 |-------|-------------|--------|--------------|-----------------|
-| 1. Baseline | Raw NatSQL, no augmentation | 6.09 | 63.42 | — |
-| 2. Tok+Comp | Token preprocessing + boundary markers | 8.32 | 68.96 | +2.22 |
-| 3. Tok+Comp + ContextTok | + schema-aware contextual token splitting | 23.50 | 70.92 | +17.41 |
-| 4. Tok+Comp + AliasNorm | + alias normalization (no ContextTok) | **77.76** | **92.79** | +71.66 |
-| 5. Tok+Comp + ContextTok + AliasNorm | Full pipeline | 77.27 | 92.50 | +71.18 |
+| 1. Baseline (T5–NatSQL) | Raw NatSQL, no augmentation | 4.55 ± 3.27 | 43.34 ± 30.67 | — |
+| 2. Tok+Comp | Token preprocessing + boundary markers | 8.51 ± 0.16 | 68.51 ± 0.32 | +3.96 |
+| 3. Tok+Comp + ContextTok | + schema-aware contextual token splitting | 15.60 ± 11.05 | 46.84 ± 33.12 | +11.05 |
+| 4. Tok+Comp + AliasNorm | + alias normalization (no ContextTok) | **78.27 ± 0.73** | **92.79 ± 0.07** | **+73.72** |
+| 5. Tok+Comp + ContextTok + AliasNorm | Full pipeline | 77.56 ± 0.85 | 92.59 ± 0.09 | +73.01 |
 
 **Key findings**
 
-- AliasNorm is the dominant augmentation, yielding the largest EM improvement.
-- ContextTok alone (Stage 3) is seed-sensitive and less stable without AliasNorm.
+- AliasNorm is the dominant augmentation, yielding the largest and most stable EM improvement.
+- ContextTok alone (Stage 3) is seed-sensitive — high variance (±11.05 EM, ±33.12 F1) without AliasNorm.
 - The full pipeline (Stage 5) matches Stage 4 performance but does not consistently exceed it.
+- Tok+Comp (Stage 2) substantially reduces variance compared to the baseline, confirming its stabilising effect.
 
-For detailed multi-seed analysis, ablation study, and error breakdown, see the thesis document.
+For detailed ablation study, difficulty-level breakdown, and error analysis, see the thesis document.
 
 ---
 
